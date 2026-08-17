@@ -1,0 +1,3 @@
+Página oficial: https://aijobs.net/salaries/download/
+Espelho no GitHub (atualizado toda semana): https://github.com/foorilla/ai-jobs-net-salaries
+CSV direto: https://raw.githubusercontent.com/foorilla/ai-jobs-net-salaries/main/salaries.csv
