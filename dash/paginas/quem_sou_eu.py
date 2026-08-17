@@ -96,11 +96,14 @@ def render() -> None:
         for i, d in enumerate(perfil.DESTAQUES)
     ])
 
-    ui.secao("→", "Sobre este dashboard")
+    st.markdown(
+        "<div class='eyebrow'>Sobre este dashboard</div>",
+        unsafe_allow_html=True,
+    )
     st.markdown(
         "<p class='legenda'>Esta aplicação foi construída em Python com Streamlit e "
         "reúne, além da minha apresentação profissional, uma análise estatística "
-        "aplicada sobre o mercado global de tecnologia — o setor em que pretendo "
+        "aplicada sobre o mercado global de tecnologia, o setor em que pretendo "
         "atuar. O objetivo é demonstrar, no mesmo artefato, competência em "
         "desenvolvimento de aplicações e em análise de dados.</p>",
         unsafe_allow_html=True,

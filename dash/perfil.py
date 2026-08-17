@@ -13,9 +13,9 @@ vem daqui. Nenhuma alteração é necessária nos demais arquivos.
 # ---------------------------------------------------------------------------
 PERFIL = {
     "nome": "Arthur Canaverde da Cruz",
-    "cargo_alvo": "Estudante de Engenharia de Software · FIAP 2ESA",
-    "subtitulo": "Desenvolvimento full stack · Dados · Automação",
-    "cidade": "São Paulo, SP — Brasil",
+    "cargo_alvo": "Estudante de Engenharia de Software, FIAP 2ESA",
+    "subtitulo": "Desenvolvimento full stack, Dados e Automação",
+    "cidade": "São Paulo, SP, Brasil",
     "email": "canaverdearthur@gmail.com",
     "telefone": "(11) 94761-9435",
     "linkedin": "https://www.linkedin.com/in/arthur-canaverde-139a3a3a1/",
@@ -23,12 +23,11 @@ PERFIL = {
     "foto": "assets/foto.jpg",
 }
 
-# Texto de apresentação. Cada item da lista vira um parágrafo.
 APRESENTACAO = [
     "Sou estudante de Engenharia de Software na FIAP (turma 2ESA), com previsão "
     "de formatura em dezembro de 2028. Venho do Colégio São Francisco Xavier "
     "(Sanfra) e, desde que entrei na graduação, tenho concentrado a prática em "
-    "desenvolvimento web, análise de dados e projetos aplicados — tanto "
+    "desenvolvimento web, análise de dados e projetos aplicados, tanto "
     "acadêmicos quanto challenges com empresa.",
 
     "No dia a dia, gosto de fechar o ciclo: entender o problema, modelar a "
@@ -39,7 +38,7 @@ APRESENTACAO = [
     "dado, e não em achismo.",
 
     "No Challenge FIAP × TOTVS, por exemplo, construí um dashboard para analisar "
-    "mais de mil transcrições de reuniões comerciais — com foco em desempenho, "
+    "mais de mil transcrições de reuniões comerciais, com foco em desempenho, "
     "organização da base e publicação automatizada. Em paralelo, este próprio "
     "dashboard reúne meu portfólio com uma análise do mercado global de "
     "tecnologia sobre 151 mil registros salariais.",
@@ -50,10 +49,9 @@ APRESENTACAO = [
     "aulas (faculdade das 8h às 11h40).",
 ]
 
-# Três frases curtas que aparecem como destaque no topo da página inicial.
 DESTAQUES = [
-    {"rotulo": "Formação", "valor": "Eng. de Software", "nota": "FIAP · 2ESA · 2025–2028"},
-    {"rotulo": "Foco", "valor": "Full stack + Dados", "nota": "React · TypeScript · Python"},
+    {"rotulo": "Formação", "valor": "Eng. de Software", "nota": "FIAP, 2ESA, 2025-2028"},
+    {"rotulo": "Foco", "valor": "Full stack + Dados", "nota": "React, TypeScript, Python"},
     {"rotulo": "Objetivo", "valor": "Estágio 2026", "nota": "Disponível após 11h40"},
 ]
 
@@ -62,23 +60,23 @@ DESTAQUES = [
 # ---------------------------------------------------------------------------
 FORMACAO = [
     {
-        "curso": "Engenharia de Software — Bacharelado",
+        "curso": "Engenharia de Software (Bacharelado)",
         "instituicao": "FIAP",
-        "periodo": "2025 — dez/2028 (previsto)",
+        "periodo": "2025 a dez/2028 (previsto)",
         "detalhe": "Turma 2ESA. Ênfase em desenvolvimento de software, arquitetura "
                    "de sistemas, banco de dados e ciência de dados.",
     },
     {
         "curso": "Ensino Médio",
-        "instituicao": "Colégio São Francisco Xavier — Rede Jesuíta de Educação",
-        "periodo": "2022 — 2024",
+        "instituicao": "Colégio São Francisco Xavier, Rede Jesuíta de Educação",
+        "periodo": "2022 a 2024",
         "detalhe": "Ipiranga, São Paulo (Sanfra).",
     },
 ]
 
 CURSOS = [
     {
-        "nome": "Design Thinking – Process (40h)",
+        "nome": "Design Thinking - Process (40h)",
         "emissor": "FIAP Nano Course",
         "ano": "04/mai/2025",
         "arquivo": "assets/certificados/Design-Thinking-Process.pdf",
@@ -93,9 +91,9 @@ CURSOS = [
 
 EXPERIENCIAS = [
     {
-        "cargo": "Desenvolvedor front-end — TOTVS Insight",
+        "cargo": "Desenvolvedor front-end, TOTVS Insight",
         "empresa": "Challenge FIAP × TOTVS",
-        "periodo": "2026 — atual",
+        "periodo": "2026 até hoje",
         "atividades": [
             "Participei do Challenge da FIAP com a TOTVS, construindo um dashboard "
             "de análise de 1.126 transcrições de reuniões comerciais em React 19, "
@@ -104,14 +102,14 @@ EXPERIENCIAS = [
             "índice de 470 KB mais um arquivo por transcrição, derrubando o "
             "carregamento inicial para menos de 1 MB.",
             "Separei a leitura dos dados em um único módulo: as telas não buscam "
-            "arquivo nem conhecem o formato da origem — só pedem o que precisam. "
+            "arquivo nem conhecem o formato da origem, só pedem o que precisam. "
             "Assim, trocar o dump estático por uma API depois fica mais simples. "
             "Também configurei publicação automática no GitHub Pages a cada push.",
         ],
     },
     {
-        "cargo": "Desenvolvedor — Sistema de alerta de enchentes",
-        "empresa": "Global Solution · FIAP",
+        "cargo": "Desenvolvedor, sistema de alerta de enchentes",
+        "empresa": "Global Solution, FIAP",
         "periodo": "2025",
         "atividades": [
             "Construí em Arduino Uno e C++ um monitor de nível de água com sensor "
@@ -131,7 +129,6 @@ IDIOMAS = [
 # ---------------------------------------------------------------------------
 # 3. SKILLS
 # ---------------------------------------------------------------------------
-# nivel: 0 a 100. Seja honesto — recrutador costuma perguntar.
 SKILLS_TECNICAS = {
     "Linguagens": [
         {"nome": "JavaScript", "nivel": 70},
@@ -164,7 +161,6 @@ SOFT_SKILLS = [
     {"nome": "Organização", "descricao": "Uso Kanban e versionamento em todo projeto."},
 ]
 
-# Aparece no radar da aba Skills — máximo 6 eixos fica legível.
 RADAR = {
     "Front-end": 80,
     "Back-end": 60,
@@ -178,7 +174,7 @@ PROJETOS = [
     {
         "titulo": "TOTVS Insight",
         "descricao": "Challenge FIAP × TOTVS: dashboard de análise de 1.126 "
-                     "transcrições de reuniões comerciais — indicadores, "
+                     "transcrições de reuniões comerciais, com indicadores, "
                      "distribuições e histórico por cliente, com carga sob "
                      "demanda de uma base de 46 MB.",
         "stack": ["React 19", "TypeScript", "Vite", "Tailwind CSS"],
@@ -196,7 +192,7 @@ PROJETOS = [
         "titulo": "Dashboard de Análise do Mercado de Tecnologia",
         "descricao": "Aplicação em Streamlit com análise estatística de 151 mil "
                      "registros salariais do mercado global de tecnologia "
-                     "(CP1 · turma 2ESA · entrega 24/08).",
+                     "(CP1, turma 2ESA, entrega 24/08).",
         "stack": ["Python", "Pandas", "Plotly", "SciPy", "Streamlit"],
         "link": "",
     },

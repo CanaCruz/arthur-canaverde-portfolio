@@ -109,7 +109,7 @@ def _secao_base(base: pd.DataFrame, recorte: pd.DataFrame) -> None:
         ])
         st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
         ui.linha_kpis([
-            {"rotulo": "Período", "valor": f"{base['ano'].min()}–{base['ano'].max()}",
+            {"rotulo": "Período", "valor": f"{base['ano'].min()}-{base['ano'].max()}",
              "nota": "6 anos"},
             {"rotulo": "Países", "valor": str(base["pais"].nunique()),
              "nota": "sede das empresas"},
@@ -125,7 +125,7 @@ def _secao_base(base: pd.DataFrame, recorte: pd.DataFrame) -> None:
         {"rotulo": "Valores ausentes", "valor": ui.numero(nulos),
          "nota": "nenhuma imputação necessária"},
         {"rotulo": "Linhas idênticas", "valor": ui.numero(duplicadas),
-         "nota": "mantidas — ver justificativa"},
+         "nota": "mantidas (ver justificativa abaixo)"},
         {"rotulo": "Outliers (Tukey)", "valor": ui.numero(int(base['outlier'].sum())),
          "nota": f"{base['outlier'].mean() * 100:.1f}% dos registros"},
     ])
@@ -138,8 +138,8 @@ def _secao_base(base: pd.DataFrame, recorte: pd.DataFrame) -> None:
         "distorceria a frequência real dos perfis mais comuns do mercado. "
         "Por isso foram <b>mantidas</b>.<br><br>"
         "<b>Decisão sobre outliers.</b> Salários acima do limite de Tukey existem de "
-        "fato — cargos executivos em big techs americanas. Eles foram "
-        "<b>marcados e não excluídos</b>: o filtro na barra lateral permite refazer "
+        "fato, em cargos executivos em big techs americanas. Eles foram "
+        "<b>marcados e não excluídos</b>. O filtro na barra lateral permite refazer "
         "toda a análise sem eles e comparar o efeito."
     )
 
@@ -155,7 +155,7 @@ def _secao_base(base: pd.DataFrame, recorte: pd.DataFrame) -> None:
 # ---------------------------------------------------------------------------
 def _secao_descritiva(recorte: pd.DataFrame) -> None:
     ui.secao("02", "Estatística descritiva",
-             "Q1 — Como a remuneração está distribuída e qual medida de tendência "
+             "Q1: como a remuneração está distribuída e qual medida de tendência "
              "central representa melhor este mercado?")
 
     resumo = est.resumo_descritivo(recorte["salario_usd"])
@@ -163,13 +163,13 @@ def _secao_descritiva(recorte: pd.DataFrame) -> None:
 
     ui.linha_kpis([
         {"rotulo": "Média", "valor": ui.moeda(resumo["media"]),
-         "nota": f"IC 95%: {ui.moeda(ic_inf)} – {ui.moeda(ic_sup)}"},
+         "nota": f"IC 95%: {ui.moeda(ic_inf)} a {ui.moeda(ic_sup)}"},
         {"rotulo": "Mediana", "valor": ui.moeda(resumo["mediana"]),
          "nota": "medida robusta a extremos", "destaque": True},
         {"rotulo": "Desvio padrão", "valor": ui.moeda(resumo["desvio"]),
          "nota": f"CV = {resumo['cv']:.1f}%"},
         {"rotulo": "Amplitude interquartil", "valor": ui.moeda(resumo["iqr"]),
-         "nota": f"Q1 {ui.moeda(resumo['q1'])} · Q3 {ui.moeda(resumo['q3'])}"},
+         "nota": f"Q1 {ui.moeda(resumo['q1'])}, Q3 {ui.moeda(resumo['q3'])}"},
     ])
 
     esquerda, direita = st.columns([1.4, 1], gap="large")
@@ -218,7 +218,7 @@ def _secao_descritiva(recorte: pd.DataFrame) -> None:
         f"{resumo['assimetria']:.2f} &gt; 0): a média fica "
         f"{relacao:.1f}% acima da mediana, puxada pela cauda de salários muito "
         f"altos. Em um mercado com essa forma, <b>a mediana descreve melhor o "
-        f"profissional típico</b> — usar a média superestima o que a maioria "
+        f"profissional típico</b>. Usar a média superestima o que a maioria "
         f"realmente ganha.<br><br>"
         f"O teste de D'Agostino-Pearson sobre amostra de "
         f"{ui.numero(normalidade['n'])} registros retorna p = "
@@ -238,7 +238,7 @@ def _secao_descritiva(recorte: pd.DataFrame) -> None:
 # ---------------------------------------------------------------------------
 def _secao_segmentos(recorte: pd.DataFrame) -> None:
     ui.secao("03", "Comparação entre segmentos",
-             "Q2 a Q5 — onde estão as diferenças: senioridade, regime de "
+             "Q2 a Q5: onde estão as diferenças entre senioridade, regime de "
              "trabalho, porte, geografia e tempo.")
 
     esquerda, direita = st.columns(2, gap="large")
@@ -253,7 +253,7 @@ def _secao_segmentos(recorte: pd.DataFrame) -> None:
         st.plotly_chart(figura, width="stretch")
 
     with direita:
-        st.markdown("##### Evolução da mediana (2020–2025)")
+        st.markdown("##### Evolução da mediana (2020-2025)")
         evolucao = (recorte.groupby(["ano", "senioridade"], observed=True)
                     .agg(mediana=("salario_usd", "median"), n=("salario_usd", "size"))
                     .reset_index())
@@ -316,7 +316,7 @@ def _secao_segmentos(recorte: pd.DataFrame) -> None:
     ui.insight(
         "A leitura cruzada mostra que <b>o efeito do regime de trabalho não é o "
         "mesmo em todas as senioridades</b>. Comparar apenas 'remoto x presencial' "
-        "no agregado esconde essa interação — é exatamente o tipo de conclusão "
+        "no agregado esconde essa interação. É o tipo de conclusão "
         "apressada que a segmentação evita."
     )
 
@@ -344,9 +344,9 @@ def _secao_testes(recorte: pd.DataFrame) -> None:
         resultado = est.comparar_grupos(grupos)
         if resultado:
             ui.linha_kpis([
-                {"rotulo": "ANOVA — F", "valor": f"{resultado['f']:.1f}",
+                {"rotulo": "ANOVA (F)", "valor": f"{resultado['f']:.1f}",
                  "nota": f"p = {resultado['p_anova']:.2e}"},
-                {"rotulo": "Kruskal-Wallis — H", "valor": f"{resultado['h']:.1f}",
+                {"rotulo": "Kruskal-Wallis (H)", "valor": f"{resultado['h']:.1f}",
                  "nota": f"p = {resultado['p_kruskal']:.2e}"},
                 {"rotulo": "Eta² (tamanho de efeito)",
                  "valor": f"{resultado['eta2']:.3f}",
@@ -356,8 +356,8 @@ def _secao_testes(recorte: pd.DataFrame) -> None:
             ui.insight(
                 est.interpretar_p(resultado["p_kruskal"], ALFA) +
                 f"<br><br>O eta² indica que a senioridade explica cerca de "
-                f"<b>{resultado['eta2'] * 100:.1f}% da variância salarial</b> — "
-                f"efeito {est.classificar_eta2(resultado['eta2'])}. Significância "
+                f"<b>{resultado['eta2'] * 100:.1f}% da variância salarial</b>, "
+                f"com efeito {est.classificar_eta2(resultado['eta2'])}. Significância "
                 f"e relevância prática são coisas diferentes: com n grande, quase "
                 f"tudo dá significativo, e por isso o tamanho de efeito é "
                 f"reportado junto."
@@ -412,8 +412,8 @@ def _secao_testes(recorte: pd.DataFrame) -> None:
                 est.interpretar_p(resultado["p_u"], ALFA) +
                 f"<br><br>Ainda assim, o d de Cohen de {abs(resultado['d']):.2f} "
                 f"aponta um efeito pequeno. A diferença existe, mas o regime de "
-                f"trabalho está longe de ser o fator determinante da remuneração — "
-                f"e parte dela pode ser efeito de composição, já que empresas "
+                f"trabalho está longe de ser o fator determinante da remuneração, "
+                f"e parte dela pode ser efeito de composição. Empresas "
                 f"americanas concentram tanto os salários mais altos quanto um "
                 f"regime específico."
             )
@@ -442,7 +442,7 @@ def _secao_testes(recorte: pd.DataFrame) -> None:
                 est.interpretar_p(resultado["p"], ALFA) +
                 "<br><br>O V de Cramér mede a <b>força</b> da associação numa escala "
                 "de 0 a 1. Valores baixos indicam que, embora a associação seja "
-                "estatisticamente detectável, ela é fraca na prática — porte e "
+                "estatisticamente detectável, ela é fraca na prática. Porte e "
                 "senioridade se distribuem de forma parecida entre si."
             )
         else:
@@ -454,13 +454,13 @@ def _secao_testes(recorte: pd.DataFrame) -> None:
 # ---------------------------------------------------------------------------
 def _secao_modelo(recorte: pd.DataFrame) -> None:
     ui.secao("05", "Correlação e modelo de regressão",
-             "Q6 — quanto do salário conseguimos explicar combinando os fatores "
+             "Q6: quanto do salário conseguimos explicar combinando os fatores "
              "disponíveis?")
 
     correl = est.correlacao(recorte["senioridade_num"], recorte["salario_usd"])
     if correl:
         st.markdown(
-            f"Senioridade × salário — Pearson r = {correl['r']:.3f} "
+            f"Senioridade x salário: Pearson r = {correl['r']:.3f} "
             f"(p = {correl['p_r']:.2e}); Spearman ρ = {correl['rho']:.3f}."
         )
 
@@ -521,7 +521,7 @@ def _secao_modelo(recorte: pd.DataFrame) -> None:
 
     ui.insight(
         f"O modelo explica <b>{resultado['r2'] * 100:.1f}% da variação</b> do log do "
-        f"salário. O restante fica com fatores que a base não registra — empresa "
+        f"salário. O restante fica com fatores que a base não registra, como empresa "
         f"específica, tempo de casa, negociação individual, formação. "
         f"É um resultado honesto para dados observacionais de autodeclaração: "
         f"identifica direção e ordem de grandeza dos efeitos, mas <b>não estabelece "
@@ -580,7 +580,7 @@ def _secao_conclusoes(recorte: pd.DataFrame) -> None:
     if "Júnior" in por_senioridade.index and "Sênior" in por_senioridade.index:
         razao = por_senioridade["Sênior"] / por_senioridade["Júnior"]
         salto = (f"A mediana de um profissional sênior é <b>{razao:.1f}× a de um "
-                 f"júnior</b> — o maior salto isolado de toda a base.")
+                 f"júnior</b>, o maior salto isolado de toda a base.")
 
     esquerda, direita = st.columns(2, gap="large")
     with esquerda:
@@ -593,7 +593,7 @@ def _secao_conclusoes(recorte: pd.DataFrame) -> None:
                 f"a média ({ui.moeda(resumo['media'])}).",
                 f"Senioridade é o fator mais forte entre os disponíveis. {salto}",
                 "Regime de trabalho tem efeito estatisticamente detectável, mas "
-                "pequeno na prática — e confundido com a geografia do empregador.",
+                "pequeno na prática, e confundido com a geografia do empregador.",
                 "A geografia da empresa domina a comparação internacional: "
                 "comparar salários entre países sem ajustar por custo de vida e "
                 "câmbio produz conclusões enganosas.",
@@ -629,7 +629,7 @@ def _secao_conclusoes(recorte: pd.DataFrame) -> None:
                   if n in recorte["senioridade"].unique()]
         nivel = st.selectbox("Senioridade", niveis)
     with campo_c:
-        cambio = st.number_input("Câmbio USD → BRL", min_value=1.0, max_value=15.0,
+        cambio = st.number_input("Câmbio USD para BRL", min_value=1.0, max_value=15.0,
                                  value=5.40, step=0.05)
     with campo_d:
         proposta = st.number_input("Proposta anual bruta (R$)", min_value=0,
@@ -664,14 +664,14 @@ def _secao_conclusoes(recorte: pd.DataFrame) -> None:
                      line_dash="dash", annotation_text="mediana",
                      annotation_position="bottom")
     figura.update_layout(height=320, showlegend=False,
-                         title=f"{familia} · {nivel}")
+                         title=f"{familia}, {nivel}")
     st.plotly_chart(figura, width="stretch")
 
     ui.insight(
         "<b>Leitura correta deste número.</b> O percentil compara a proposta com um "
         "mercado majoritariamente norte-americano, convertido a câmbio nominal. "
         "Ele serve para entender <i>posição relativa dentro da própria faixa</i> e "
-        "para calibrar expectativa de progressão — não para afirmar que uma vaga "
+        "para calibrar expectativa de progressão, não para afirmar que uma vaga "
         "no Brasil deveria pagar o mesmo que uma nos Estados Unidos."
     )
 

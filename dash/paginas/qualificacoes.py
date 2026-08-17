@@ -40,7 +40,7 @@ def render() -> None:
         for item in perfil.FORMACAO:
             ui.painel(
                 titulo=item["curso"],
-                meta=f"{item['instituicao']} · {item['periodo']}",
+                meta=f"{item['instituicao']}, {item['periodo']}",
                 texto=item.get("detalhe", ""),
             )
 
@@ -48,7 +48,7 @@ def render() -> None:
         for item in perfil.EXPERIENCIAS:
             ui.painel(
                 titulo=item["cargo"],
-                meta=f"{item['empresa']} · {item['periodo']}",
+                meta=f"{item['empresa']}, {item['periodo']}",
                 itens=item.get("atividades", []),
             )
 
@@ -57,7 +57,7 @@ def render() -> None:
         for item in perfil.CURSOS:
             ui.painel(
                 titulo=item["nome"],
-                meta=f"{item['emissor']} · {item['ano']}",
+                meta=f"{item['emissor']}, {item['ano']}",
             )
             caminho = _arquivo_asset(item.get("arquivo", ""))
             if caminho is not None:
@@ -72,5 +72,5 @@ def render() -> None:
         ui.secao("04", "Idiomas")
         st.markdown("<div class='painel'>", unsafe_allow_html=True)
         for item in perfil.IDIOMAS:
-            ui.barra_nivel(f"{item['idioma']} — {item['nivel']}", item["escala"])
+            ui.barra_nivel(f"{item['idioma']}, {item['nivel']}", item["escala"])
         st.markdown("</div>", unsafe_allow_html=True)

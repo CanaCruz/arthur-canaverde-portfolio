@@ -132,9 +132,9 @@ def qui_quadrado(tabela: pd.DataFrame) -> dict:
 def interpretar_p(p: float, alfa: float = 0.05) -> str:
     """Frase padrão de decisão do teste."""
     if p < alfa:
-        return (f"p = {p:.2e} &lt; α = {alfa:.2f} → <b>rejeitamos H₀</b>: "
+        return (f"p = {p:.2e} &lt; α = {alfa:.2f}: <b>rejeitamos H₀</b>, "
                 f"a diferença observada é estatisticamente significativa.")
-    return (f"p = {p:.4f} ≥ α = {alfa:.2f} → <b>não rejeitamos H₀</b>: "
+    return (f"p = {p:.4f} ≥ α = {alfa:.2f}: <b>não rejeitamos H₀</b>, "
             f"não há evidência suficiente de diferença.")
 
 

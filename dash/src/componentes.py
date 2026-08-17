@@ -23,7 +23,7 @@ def secao(numero: str, titulo: str, descricao: str = "") -> None:
     A numeração é usada apenas na aba de análise, onde as seções formam de fato
     uma sequência metodológica (base → descritiva → testes → modelo → conclusão).
     """
-    st.markdown(f"<div class='eyebrow'>{numero} · {titulo}</div>",
+    st.markdown(f"<div class='eyebrow'>{numero}. {titulo}</div>",
                 unsafe_allow_html=True)
     if descricao:
         st.markdown(f"<p class='legenda'>{descricao}</p>", unsafe_allow_html=True)

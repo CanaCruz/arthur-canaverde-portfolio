@@ -18,7 +18,7 @@ from paginas import analise, qualificacoes, quem_sou_eu, skills
 from src.estilo import aplicar_estilo, registrar_template
 
 st.set_page_config(
-    page_title=f"{perfil.PERFIL['nome']} · Dashboard Profissional",
+    page_title=f"{perfil.PERFIL['nome']} - Dashboard Profissional",
     page_icon="◆",
     layout="wide",
     initial_sidebar_state="expanded",
