@@ -11,7 +11,20 @@ import streamlit as st
 import perfil
 from src import componentes as ui
 
-_ROOT = Path(__file__).resolve().parent.parent
+
+def _arquivo_asset(relativo: str) -> Path | None:
+    if not relativo:
+        return None
+    bases = [
+        Path(perfil.__file__).resolve().parent,
+        Path.cwd() / "dash",
+        Path.cwd(),
+    ]
+    for base in bases:
+        caminho = (base / relativo).resolve()
+        if caminho.is_file():
+            return caminho
+    return None
 
 
 def render() -> None:
@@ -46,17 +59,15 @@ def render() -> None:
                 titulo=item["nome"],
                 meta=f"{item['emissor']} · {item['ano']}",
             )
-            arquivo = item.get("arquivo", "")
-            caminho = (_ROOT / arquivo).resolve() if arquivo else None
-            if caminho and caminho.exists():
-                with open(caminho, "rb") as f:
-                    st.download_button(
-                        label="Baixar certificado PDF",
-                        data=f.read(),
-                        file_name=caminho.name,
-                        mime="application/pdf",
-                        key=f"cert_{caminho.stem}",
-                    )
+            caminho = _arquivo_asset(item.get("arquivo", ""))
+            if caminho is not None:
+                st.download_button(
+                    label="Baixar certificado PDF",
+                    data=caminho.read_bytes(),
+                    file_name=caminho.name,
+                    mime="application/pdf",
+                    key=f"cert_{caminho.stem}",
+                )
 
         ui.secao("04", "Idiomas")
         st.markdown("<div class='painel'>", unsafe_allow_html=True)

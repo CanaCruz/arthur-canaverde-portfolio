@@ -12,8 +12,21 @@ import perfil
 from src import componentes as ui
 from src.estilo import AMBAR, SUAVE
 
-# Pasta do app (onde estão app.py e assets/), independente do cwd do Cloud.
-_ROOT = Path(__file__).resolve().parent.parent
+
+def _arquivo_asset(relativo: str) -> Path | None:
+    """Resolve assets/… tanto no Cloud (cwd = raiz do repo) quanto local."""
+    if not relativo:
+        return None
+    bases = [
+        Path(perfil.__file__).resolve().parent,  # pasta dash/
+        Path.cwd() / "dash",
+        Path.cwd(),
+    ]
+    for base in bases:
+        caminho = (base / relativo).resolve()
+        if caminho.is_file():
+            return caminho
+    return None
 
 
 def render() -> None:
@@ -38,25 +51,31 @@ def render() -> None:
             st.markdown(f"<p class='legenda'>{paragrafo}</p>", unsafe_allow_html=True)
 
     with coluna_lado:
-        foto = dados.get("foto", "")
-        foto_path = (_ROOT / foto).resolve() if foto else None
-        if foto_path and foto_path.exists():
-            st.image(str(foto_path), use_container_width=True)
+        foto_path = _arquivo_asset(dados.get("foto", ""))
+        if foto_path is not None:
+            st.image(foto_path.read_bytes(), use_container_width=True)
 
+        linkedin = (dados.get("linkedin") or "").strip()
+        github = (dados.get("github") or "").strip()
         contatos = [
             ("Local", dados["cidade"], None),
-            ("E-mail", dados["email"], f"mailto:{dados['email']}"),
+            ("E-mail", dados["email"],
+             f"mailto:{dados['email']}" if dados.get("email") else None),
             ("Telefone", dados["telefone"], None),
-            ("LinkedIn", "linkedin.com/in", dados["linkedin"]),
-            ("GitHub", "github.com", dados["github"]),
+            ("LinkedIn", "linkedin.com/in/arthur-canaverde", linkedin or None),
+            ("GitHub", "github.com/CanaCruz", github or None),
         ]
         linhas = []
         for rotulo, valor, link in contatos:
-            # Campo ainda não preenchido em perfil.py: melhor omitir a linha do que
-            # exibir um rótulo solto ou um link sem destino.
-            if not valor or (link is not None and not link.removeprefix("mailto:")):
+            if not valor:
                 continue
-            conteudo = f"<a href='{link}' style='color:{AMBAR};text-decoration:none'>{valor}</a>" if link else valor
+            if rotulo in ("LinkedIn", "GitHub", "E-mail") and not link:
+                continue
+            conteudo = (
+                f"<a href='{link}' target='_blank' rel='noopener' "
+                f"style='color:{AMBAR};text-decoration:none'>{valor}</a>"
+                if link else valor
+            )
             linhas.append(
                 f"<div style='display:flex;justify-content:space-between;gap:1rem;"
                 f"padding:0.45rem 0;border-bottom:1px solid #26303B;font-size:0.86rem'>"
