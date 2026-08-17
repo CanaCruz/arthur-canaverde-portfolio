@@ -178,7 +178,7 @@ PROJETOS = [
                      "distribuições e histórico por cliente, com carga sob "
                      "demanda de uma base de 46 MB.",
         "stack": ["React 19", "TypeScript", "Vite", "Tailwind CSS"],
-        "link": "https://github.com/CanaCruz/TOTVS-Insigth",
+        "link": "https://github.com/CanaCruz/TOTVS-Insight",
     },
     {
         "titulo": "Alerta de Enchentes com Arduino",
