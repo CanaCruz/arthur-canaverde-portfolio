@@ -11,6 +11,8 @@ import streamlit as st
 import perfil
 from src import componentes as ui
 
+_ROOT = Path(__file__).resolve().parent.parent
+
 
 def render() -> None:
     ui.cabecalho(
@@ -45,14 +47,15 @@ def render() -> None:
                 meta=f"{item['emissor']} · {item['ano']}",
             )
             arquivo = item.get("arquivo", "")
-            if arquivo and Path(arquivo).exists():
-                with open(arquivo, "rb") as f:
+            caminho = (_ROOT / arquivo).resolve() if arquivo else None
+            if caminho and caminho.exists():
+                with open(caminho, "rb") as f:
                     st.download_button(
                         label="Baixar certificado PDF",
                         data=f.read(),
-                        file_name=Path(arquivo).name,
+                        file_name=caminho.name,
                         mime="application/pdf",
-                        key=f"cert_{Path(arquivo).stem}",
+                        key=f"cert_{caminho.stem}",
                     )
 
         ui.secao("04", "Idiomas")

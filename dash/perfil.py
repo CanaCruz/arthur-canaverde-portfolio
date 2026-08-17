@@ -5,7 +5,7 @@ perfil.py
 Todo o conteúdo das abas "Quem sou eu", "Minhas qualificações" e "Skills"
 vem daqui. Nenhuma alteração é necessária nos demais arquivos.
 
->>> O LinkedIn ainda está vazio — preencha quando criar o perfil. <<<
+>>> Personalize em PERFIL. A foto e os certificados usam caminhos relativos à pasta do app. <<<
 """
 
 # ---------------------------------------------------------------------------
@@ -18,7 +18,7 @@ PERFIL = {
     "cidade": "São Paulo, SP — Brasil",
     "email": "canaverdearthur@gmail.com",
     "telefone": "(11) 94761-9435",
-    "linkedin": "",  # criar e colar a URL
+    "linkedin": "https://www.linkedin.com/in/arthur-canaverde-139a3a3a1/",
     "github": "https://github.com/CanaCruz",
     "foto": "assets/foto.jpg",
 }

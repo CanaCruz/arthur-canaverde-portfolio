@@ -12,6 +12,9 @@ import perfil
 from src import componentes as ui
 from src.estilo import AMBAR, SUAVE
 
+# Pasta do app (onde estão app.py e assets/), independente do cwd do Cloud.
+_ROOT = Path(__file__).resolve().parent.parent
+
 
 def render() -> None:
     dados = perfil.PERFIL
@@ -36,8 +39,9 @@ def render() -> None:
 
     with coluna_lado:
         foto = dados.get("foto", "")
-        if foto and Path(foto).exists():
-            st.image(foto, width="stretch")
+        foto_path = (_ROOT / foto).resolve() if foto else None
+        if foto_path and foto_path.exists():
+            st.image(str(foto_path), use_container_width=True)
 
         contatos = [
             ("Local", dados["cidade"], None),
