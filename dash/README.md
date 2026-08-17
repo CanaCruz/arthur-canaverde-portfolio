@@ -1,4 +1,4 @@
-# Dashboard — código da aplicação
+# Dashboard - código da aplicação
 
 O README principal do portfólio está na [raiz do repositório](../README.md).
 

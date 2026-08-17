@@ -1,10 +1,10 @@
-# Arthur Canaverde — Portfolio Dashboard
+# Arthur Canaverde - Portfolio Dashboard
 
 Portfólio profissional em Python/Streamlit: apresentação, qualificações, skills e uma análise estatística do mercado global de tecnologia, dados e IA.
 
 **App online:** [arthur-canaverde-portfolio.streamlit.app](https://arthur-canaverde-portfolio-spy8bfkpp3eqwiqwkccp7q.streamlit.app/)
 
-[LinkedIn](https://www.linkedin.com/in/arthur-canaverde-139a3a3a1/) · [GitHub](https://github.com/CanaCruz)
+[LinkedIn](https://www.linkedin.com/in/arthur-canaverde-139a3a3a1/) | [GitHub](https://github.com/CanaCruz)
 
 ---
 
@@ -15,17 +15,17 @@ Portfólio profissional em Python/Streamlit: apresentação, qualificações, sk
 | **Quem sou eu** | Apresentação, contato e foco de carreira |
 | **Minhas qualificações** | Formação, cursos/certificados, experiências e idiomas |
 | **Skills** | Competências técnicas, soft skills, radar e projetos |
-| **Análise de Dados** | Estudo salarial do mercado de tech (2020–2025) |
+| **Análise de Dados** | Estudo salarial do mercado de tech (2020-2025) |
 
 ## Análise de dados
 
-Base pública **Global Salaries in AI, ML & Data Science** ([ai-jobs.net](https://aijobs.net/salaries/), licença CC0) — ~151 mil registros.
+Base pública **Global Salaries in AI, ML & Data Science** ([ai-jobs.net](https://aijobs.net/salaries/), licença CC0), com cerca de 151 mil registros.
 
 A análise cobre tratamento da base, estatística descritiva, segmentação (senioridade, regime, geografia, tempo), testes de hipótese, regressão log-linear e um simulador de percentil salarial.
 
 ## Stack
 
-Python · Streamlit · Pandas · NumPy · SciPy · Plotly
+Python, Streamlit, Pandas, NumPy, SciPy, Plotly
 
 ## Rodar localmente
 
@@ -69,4 +69,4 @@ dash/
 
 ---
 
-Estudante de Engenharia de Software · FIAP 2ESA · disponível para estágio após 11h40.
+Estudante de Engenharia de Software, FIAP 2ESA. Disponível para estágio após 11h40.

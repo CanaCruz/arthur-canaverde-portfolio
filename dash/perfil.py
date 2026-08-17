@@ -194,6 +194,6 @@ PROJETOS = [
                      "registros salariais do mercado global de tecnologia "
                      "(CP1, turma 2ESA, entrega 24/08).",
         "stack": ["Python", "Pandas", "Plotly", "SciPy", "Streamlit"],
-        "link": "",
+        "link": "https://github.com/CanaCruz/arthur-canaverde-portfolio",
     },
 ]
